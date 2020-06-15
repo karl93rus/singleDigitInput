@@ -1,4 +1,4 @@
-export class DIJS {
+export class SinChar {
   private digits: HTMLInputElement[]; // inputs
   private resultingPassInput: HTMLInputElement; // hidden input to assemble the final string
   private filledPass: boolean; // is pass value emty?
@@ -7,8 +7,6 @@ export class DIJS {
   constructor(selector: string, hiddenInputId: string) {
     this.digits = Array.from(document.querySelectorAll(selector)) as HTMLInputElement[];
     this.resultingPassInput = document.getElementById(hiddenInputId) as HTMLInputElement;
-    console.log('constructor', hiddenInputId, this.digits);
-    console.log(this.resultingPassInput);
     this.filledPass = this.resultingPassInput.value ? true : false;
     this.recievedPass = [];
     

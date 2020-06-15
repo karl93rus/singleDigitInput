@@ -1,4 +1,4 @@
-export class DIJS {
+export class SinChar {
     constructor(selector, hiddenInputId) {
         this.digits = Array.from(document.querySelectorAll(selector));
         this.resultingPassInput = document.getElementById(hiddenInputId);
