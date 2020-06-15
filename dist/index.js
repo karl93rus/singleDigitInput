@@ -2,8 +2,6 @@ export class SinChar {
     constructor(selector, hiddenInputId) {
         this.digits = Array.from(document.querySelectorAll(selector));
         this.resultingPassInput = document.getElementById(hiddenInputId);
-        console.log('constructor', hiddenInputId, this.digits);
-        console.log(this.resultingPassInput);
         this.filledPass = this.resultingPassInput.value ? true : false;
         this.recievedPass = [];
         // if password input value is not empty (incorrect code was filled in),
