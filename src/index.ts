@@ -3,12 +3,14 @@ export class SinChar {
   private resultingPassInput: HTMLInputElement; // hidden input to assemble the final string
   private filledPass: boolean; // is pass value emty?
   private recievedPass: string[]; // empty array to store splitted pass value
+  private isFilled: boolean;
 
   constructor(selector: string, hiddenInputId: string) {
     this.digits = Array.from(document.querySelectorAll(selector)) as HTMLInputElement[];
     this.resultingPassInput = document.getElementById(hiddenInputId) as HTMLInputElement;
     this.filledPass = this.resultingPassInput.value ? true : false;
     this.recievedPass = [];
+    this.isFilled = false;
     
     // if password input value is not empty (incorrect code was filled in),
     // fill code this.digits with recieved value
@@ -66,9 +68,9 @@ export class SinChar {
         this.digits.forEach(d => {
           this.resultingPassInput.value += d.value;
         });
-        if(cb && this.resultingPassInput.value.length === this.digits.length) {
+        if(cb && !this.isFilled && this.resultingPassInput.value.length === this.digits.length) {
           cb();
-        } else if(this.resultingPassInput.value.length === this.digits.length) {
+        } else if(!this.isFilled && this.resultingPassInput.value.length === this.digits.length) {
           console.log('execute action with value: ', this.resultingPassInput.value);
         } else {
           return;
