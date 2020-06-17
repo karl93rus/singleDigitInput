@@ -38,12 +38,15 @@ export class SinChar {
 
       digit.addEventListener('keydown', (e: KeyboardEvent) => {
         if(digit.value.length === 1 && e.key === 'Backspace' && index > 0) {
+          this.isFilled = false;
           digit.value = '';
           return;
         } else if(digit.value.length === 0 && e.key === 'Backspace' && index > 0) {
+          this.isFilled = false;
           this.digits[index - 1].value = '';
           this.digits[index - 1].focus();
         } else if(e.key === 'Backspace' && index === 0) {
+          this.isFilled = false;
           return;
         }
       });
