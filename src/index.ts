@@ -72,8 +72,8 @@ export class SinChar {
           this.resultingPassInput.value += d.value;
         });
         if(cb && !this.isFilled && this.resultingPassInput.value.length === this.digits.length) {
-          cb();
           this.isFilled = true;
+          cb();
         } else if(!this.isFilled && this.resultingPassInput.value.length === this.digits.length) {
           console.log('execute action with value: ', this.resultingPassInput.value);
           this.isFilled = true;
