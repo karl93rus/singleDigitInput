@@ -70,8 +70,10 @@ export class SinChar {
         });
         if(cb && !this.isFilled && this.resultingPassInput.value.length === this.digits.length) {
           cb();
+          this.isFilled = true;
         } else if(!this.isFilled && this.resultingPassInput.value.length === this.digits.length) {
           console.log('execute action with value: ', this.resultingPassInput.value);
+          this.isFilled = true;
         } else {
           return;
         }
