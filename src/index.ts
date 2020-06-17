@@ -70,6 +70,8 @@ export class SinChar {
           cb();
         } else if(this.resultingPassInput.value.length === this.digits.length) {
           console.log('execute action with value: ', this.resultingPassInput.value);
+        } else {
+          return;
         }
       });
     });

@@ -59,11 +59,14 @@ export class SinChar {
                 this.digits.forEach(d => {
                     this.resultingPassInput.value += d.value;
                 });
-                if (cb) {
+                if (cb && this.resultingPassInput.value.length === this.digits.length) {
                     cb();
                 }
-                else if (this.resultingPassInput.value.length === 6) {
+                else if (this.resultingPassInput.value.length === this.digits.length) {
                     console.log('execute action with value: ', this.resultingPassInput.value);
+                }
+                else {
+                    return;
                 }
             });
         });
