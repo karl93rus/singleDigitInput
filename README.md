@@ -23,10 +23,15 @@ It has 6 inputs for typing in 1 digit per input. For exapmle it can be authoriza
 Create instance and pass 2 arguments:
 1. CSS selector to pick all inputs. It is a ```querySelectorAll``` underhood.
 2. ID attribute of a hidden input. This input stores all the digits we entered.
-After instance is created, run ```.processCodeInput(callback)``` method. This will initialize all keyboard the events
+After instance is created, run ```.processCodeInput(callback)``` method. This will initialize all keyboard the events.
+Please notice, that you have to manualy store the final value result as shown in example below.
+I am thinking about making this process less annoying for user.
 ```javascript
 const sch = new SinChar('.inputs-div > .my-input', 'final-value');
-sch.processCodeInput(callback);
+sch.processCodeInput(() => {
+  const FINAL_RESULT = document.getElementById('final-value').value;
+  // Here is your code...
+});
 ```
 
 #### [Sourse code on github](https://github.com/karl93rus/singleDigitInput)
