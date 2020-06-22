@@ -1,14 +1,21 @@
 {
   "name": "sinchar",
   "version": "0.0.9",
-  "description": "",
+  "description": "Single digit input",
   "main": "dist/index.js",
   "scripts": {
     "pub:patch": "tsc && npm version patch && npm publish"
   },
-  "author": "",
+  "author": "Alex Sazonov",
   "license": "ISC",
   "devDependencies": {
     "typescript": "^3.9.5"
-  }
+  },
+  "keywords": [
+    "input",
+    "single input",
+    "digit input",
+    "focus",
+    "blur"
+  ]
 }

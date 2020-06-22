@@ -28,3 +28,5 @@ After instance is created, run ```.processCodeInput(callback)``` method. This wi
 const sch = new SinChar('.inputs-div > .my-input', 'final-value');
 sch.processCodeInput(callback);
 ```
+
+#### [Sourse code on github](http://github.com)
