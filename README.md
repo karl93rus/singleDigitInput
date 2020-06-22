@@ -29,4 +29,4 @@ const sch = new SinChar('.inputs-div > .my-input', 'final-value');
 sch.processCodeInput(callback);
 ```
 
-#### [Sourse code on github](http://github.com)
+#### [Sourse code on github](https://github.com/karl93rus/singleDigitInput)

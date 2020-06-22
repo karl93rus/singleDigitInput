@@ -7,6 +7,10 @@
     "pub:patch": "tsc && npm version patch && npm publish"
   },
   "author": "Alex Sazonov",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/karl93rus/singleDigitInput"
+  },
   "license": "ISC",
   "devDependencies": {
     "typescript": "^3.9.5"
