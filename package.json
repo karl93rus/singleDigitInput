@@ -1,6 +1,6 @@
 {
   "name": "sinchar",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Single digit input",
   "main": "dist/index.js",
   "scripts": {
@@ -8,8 +8,8 @@
   },
   "author": "Alex Sazonov",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/karl93rus/singleDigitInput"
+    "type": "git",
+    "url": "https://github.com/karl93rus/singleDigitInput"
   },
   "license": "ISC",
   "devDependencies": {
