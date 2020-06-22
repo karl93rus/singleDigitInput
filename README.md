@@ -12,7 +12,7 @@ Imagine structure like this:
   <input class="my-input" maxlength="1">
   <input class="my-input" maxlength="1">
   <input class="my-input" maxlength="1">
-  <input type="hidden" id="final-value" maxlength="1">
+  <input type="hidden" id="final-value">
 </div>
 ```
 It has 6 inputs for typing in 1 digit per input. For exapmle it can be authorization sms code.
@@ -21,6 +21,6 @@ Create instance and pass 2 arguments:
 2. ID attribute of a hidden input. This input stores all the digits we entered.
 After instance is created, run ```.processCodeInput(callback)``` method. This will initialize all keyboard the events
 ```javascript
-const sch = new SinChar('.inputs-div > .my-input', 'finale-value');
+const sch = new SinChar('.inputs-div > .my-input', 'final-value');
 sch.processCodeInput(callback);
 ```
