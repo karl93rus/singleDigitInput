@@ -1,5 +1,9 @@
 # singleDigitInput
 ### Small utility to controll single char input field. Works well on desktop and mobile devices.
+Visually it looks something like this. After filling up all the inputs a callback function executes.
+
+![example](./ghp.jpeg)
+
 Run ```npm i sinchar``` to install as npm package.
 
 ### Usage
