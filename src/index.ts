@@ -70,6 +70,10 @@ export class SinChar {
               console.log('index === this.digits.length - 1', index);
             }
             digit.value = '';
+            if(!/\d/.test(this.digits[index - 1].value)) {
+              this.digits[index - 1].value = ''
+              this.digits[index - 1].focus();
+            }
           }
         } else if(index === 0) {
           if(this.debugMode) {
