@@ -28,15 +28,16 @@ export class SinChar {
         digit.value = this.recievedPass[index]; // fill every digit with a corresponding recievedPass array element
       }
 
-      digit.addEventListener('keypress', (e: KeyboardEvent) => {
-        if(e.key !== 'Backspace' && index + 1 < this.digits.length) {
+      digit.addEventListener('keydown', (e: KeyboardEvent) => {
+        if(e.key !== 'Backspace' && index >= 0 && index < this.digits.length -1) {
+          digit.value = e.key;
           this.digits[index + 1].focus();
+          e.preventDefault();
+          e.stopPropagation();
         } else if(e.key !== 'Backspace' && index === this.digits.length - 1) {
           return;
         }
-      });
 
-      digit.addEventListener('keydown', (e: KeyboardEvent) => {
         if(digit.value.length === 1 && e.key === 'Backspace' && index > 0) {
           this.isFilled = false;
           digit.value = '';
@@ -52,18 +53,18 @@ export class SinChar {
       });
 
       digit.addEventListener('keyup', (e: KeyboardEvent) => {
-        if(index > 0 && index < this.digits.length - 1) {
-          if(!/\d/.test(this.digits[index - 1].value)) {
-            this.digits[index - 1].value = ''
-            this.digits[index - 1].focus();
-          }
-        } else if(index === this.digits.length - 1) {
+        if(index === this.digits.length - 1) {
           if(!/\d/.test(digit.value)) {
             digit.value = '';
           }
         } else if(index === 0) {
           if(!/\d/.test(digit.value)) {
             digit.value = '';
+          }
+        } else if(index > 0 && index < this.digits.length - 1) {
+          if(!/\d/.test(this.digits[index - 1].value)) {
+            this.digits[index - 1].value = ''
+            this.digits[index - 1].focus();
           }
         }
 
