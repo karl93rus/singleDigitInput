@@ -4,13 +4,20 @@ export class SinChar {
   private filledPass: boolean; // is pass value emty?
   private recievedPass: string[]; // empty array to store splitted pass value
   private isFilled: boolean;
+  private debugMode?: boolean;
 
-  constructor(selector: string, hiddenInputId: string) {
+  constructor(selector: string, hiddenInputId: string, debug?: boolean) {
     this.digits = Array.from(document.querySelectorAll(selector)) as HTMLInputElement[];
     this.resultingPassInput = document.getElementById(hiddenInputId) as HTMLInputElement;
     this.filledPass = this.resultingPassInput.value ? true : false;
     this.recievedPass = [];
     this.isFilled = false;
+
+    if(debug) {
+      this.debugMode = debug;
+    } else {
+      this.debugMode = false;
+    }
     
     // if password input value is not empty (incorrect code was filled in),
     // fill code this.digits with recieved value
@@ -53,15 +60,28 @@ export class SinChar {
       });
 
       digit.addEventListener('keyup', (e: KeyboardEvent) => {
+        if(this.debugMode) {
+          console.log('keyup');
+        }
+
         if(index === this.digits.length - 1) {
           if(!/\d/.test(digit.value)) {
+            if(this.debugMode) {
+              console.log('index === this.digits.length - 1', index);
+            }
             digit.value = '';
           }
         } else if(index === 0) {
+          if(this.debugMode) {
+            console.log('index === 0', index);
+          }
           if(!/\d/.test(digit.value)) {
             digit.value = '';
           }
         } else if(index > 0 && index < this.digits.length - 1) {
+          if(this.debugMode) {
+            console.log('index > 0 && index < this.digits.length - 1', index);
+          }
           if(!/\d/.test(this.digits[index - 1].value)) {
             this.digits[index - 1].value = ''
             this.digits[index - 1].focus();
@@ -71,12 +91,17 @@ export class SinChar {
         this.resultingPassInput.value = '';
         this.digits.forEach(d => {
           this.resultingPassInput.value += d.value;
+          if(this.debugMode) {
+            console.log('result: ', this.resultingPassInput.value);
+          }
         });
         if(cb && !this.isFilled && this.resultingPassInput.value.length === this.digits.length) {
           this.isFilled = true;
           cb();
         } else if(!this.isFilled && this.resultingPassInput.value.length === this.digits.length) {
-          console.log('execute action with value: ', this.resultingPassInput.value);
+          if(this.debugMode) {
+            console.log('execute action with value: ', this.resultingPassInput.value);
+          }
           this.isFilled = true;
         } else {
           return;
