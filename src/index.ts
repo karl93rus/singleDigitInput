@@ -73,7 +73,7 @@ export class SinChar {
 
       digit.addEventListener('keyup', (e: KeyboardEvent) => {
         if(this.debugMode) {
-          console.log('keyup');
+          console.log('keyup', this.filledClass, digit.value, index);
         }
         if(this.filledClass && digit.value !== '') {
           digit.classList.add(this.filledClass);
