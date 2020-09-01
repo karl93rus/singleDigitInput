@@ -50,6 +50,14 @@ export class SinChar {
       digit.addEventListener('keydown', (e: KeyboardEvent) => {
         if(e.key !== 'Backspace' && index >= 0 && index < this.digits.length -1) {
           digit.value = e.key;
+          if(this.debugMode) {
+            console.log('keydown', this.filledClass, digit.value, index);
+          }
+          if(this.filledClass && digit.value !== '') {
+            digit.classList.add(this.filledClass);
+          } else if(this.filledClass && digit.value === '') {
+            digit.classList.remove(this.filledClass);
+          }
           this.digits[index + 1].focus();
           e.preventDefault();
           e.stopPropagation();
@@ -74,9 +82,6 @@ export class SinChar {
       digit.addEventListener('keyup', (e: KeyboardEvent) => {
         if(this.debugMode) {
           console.log('keyup', this.filledClass, digit.value, index);
-        }
-        if(this.filledClass && digit.value !== '') {
-          digit.classList.add(this.filledClass);
         }
 
         if(index === this.digits.length - 1) {
