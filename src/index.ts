@@ -50,9 +50,6 @@ export class SinChar {
       digit.addEventListener('keydown', (e: KeyboardEvent) => {
         if(e.key !== 'Backspace' && index >= 0 && index < this.digits.length -1) {
           digit.value = e.key;
-          if(this.debugMode) {
-            console.log('keydown', this.filledClass, digit.value, index);
-          }
           if(this.filledClass && digit.value !== '') {
             digit.classList.add(this.filledClass);
           }
@@ -63,17 +60,18 @@ export class SinChar {
           return;
         }
 
+        if(this.filledClass && e.key === 'Backspace') {
+          digit.classList.remove(this.filledClass);
+          if(this.debugMode) {
+            console.log('keydown', 'digit.value.length === 0:', digit.value.length === 0, 'this.filledClass:', this.filledClass, e.key, digit.classList)
+          }
+        }
+
         if(digit.value.length === 1 && e.key === 'Backspace' && index > 0) {
           this.isFilled = false;
           digit.value = '';
           return;
         } else if(digit.value.length === 0 && e.key === 'Backspace' && index > 0) {
-          if(this.filledClass && e.key === 'Backspace') {
-            digit.classList.remove(this.filledClass);
-          }
-          if(this.debugMode) {
-            console.log('keydown', 'digit.value.length === 0:', digit.value.length === 0, 'this.filledClass:', this.filledClass, e.key, digit.classList)
-          }
           this.isFilled = false;
           this.digits[index - 1].value = '';
           this.digits[index - 1].focus();
@@ -86,6 +84,13 @@ export class SinChar {
       digit.addEventListener('keyup', (e: KeyboardEvent) => {
         if(this.debugMode) {
           console.log('keyup', this.filledClass, digit.value, index);
+        }
+
+        if(this.filledClass && e.key === 'Backspace') {
+          digit.classList.remove(this.filledClass);
+          if(this.debugMode) {
+            console.log('keydown', 'digit.value.length === 0:', digit.value.length === 0, 'this.filledClass:', this.filledClass, e.key, digit.classList)
+          }
         }
 
         if(index === this.digits.length - 1) {

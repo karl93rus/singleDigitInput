@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "compile": "tsc && npx minify ./dist/index.js > ./dist/index2.js && cat ./dist/index2.js > ./dist/index.js && rm ./dist/index2.js",
-    "pub:patch": "npm version patch && npm publish"
+    "pub:patch": "npm version patch && npm publish",
+    "pub:minor": "npm version minor && npm publish"
   },
   "author": "Alex Sazonov",
   "repository": {
