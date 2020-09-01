@@ -1,3 +1,10 @@
+interface IOptions {
+  selector: string;
+  hiddenInputId: string;
+  filledClass?: string;
+  debug?: boolean
+}
+
 export class SinChar {
   private digits: HTMLInputElement[]; // inputs
   private resultingPassInput: HTMLInputElement; // hidden input to assemble the final string
@@ -5,18 +12,23 @@ export class SinChar {
   private recievedPass: string[]; // empty array to store splitted pass value
   private isFilled: boolean;
   private debugMode?: boolean;
+  private filledClass?: string;
 
-  constructor(selector: string, hiddenInputId: string, debug?: boolean) {
-    this.digits = Array.from(document.querySelectorAll(selector)) as HTMLInputElement[];
-    this.resultingPassInput = document.getElementById(hiddenInputId) as HTMLInputElement;
+  // constructor(selector: string, hiddenInputId: string, debug?: boolean) {
+  constructor(options: IOptions) {
+    this.digits = Array.from(document.querySelectorAll(options.selector)) as HTMLInputElement[];
+    this.resultingPassInput = document.getElementById(options.hiddenInputId) as HTMLInputElement;
     this.filledPass = this.resultingPassInput.value ? true : false;
     this.recievedPass = [];
     this.isFilled = false;
 
-    if(debug) {
-      this.debugMode = debug;
+    if(options.debug) {
+      this.debugMode = options.debug;
     } else {
       this.debugMode = false;
+    }
+    if(options.filledClass) {
+      this.filledClass = options.filledClass;
     }
     
     // if password input value is not empty (incorrect code was filled in),
@@ -30,10 +42,16 @@ export class SinChar {
   public processCodeInput(cb?: Function) {  
     this.digits.forEach((digit, index) => {
 
+      if(this.filledClass && digit.value !== '') {
+        digit.classList.add(this.filledClass);
+      }
+
       if(this.filledPass){
         // if pass value is not empty
         digit.value = this.recievedPass[index]; // fill every digit with a corresponding recievedPass array element
       }
+
+
 
       digit.addEventListener('keydown', (e: KeyboardEvent) => {
         if(e.key !== 'Backspace' && index >= 0 && index < this.digits.length -1) {
