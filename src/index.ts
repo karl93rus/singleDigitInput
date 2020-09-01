@@ -63,12 +63,13 @@ export class SinChar {
           return;
         }
 
+        if(this.filledClass && e.key === 'Backspace') {
+          digit.classList.remove(this.filledClass);
+        }
+
         if(digit.value.length === 1 && e.key === 'Backspace' && index > 0) {
           this.isFilled = false;
           digit.value = '';
-          if(this.filledClass && digit.value === '') {
-            digit.classList.remove(this.filledClass);
-          }
           return;
         } else if(digit.value.length === 0 && e.key === 'Backspace' && index > 0) {
           this.isFilled = false;
