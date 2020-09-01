@@ -1,6 +1,6 @@
 {
   "name": "sinchar",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Single digit input",
   "main": "dist/index.js",
   "scripts": {
