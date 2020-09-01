@@ -42,16 +42,10 @@ export class SinChar {
   public processCodeInput(cb?: Function) {  
     this.digits.forEach((digit, index) => {
 
-      if(this.filledClass && digit.value !== '') {
-        digit.classList.add(this.filledClass);
-      }
-
       if(this.filledPass){
         // if pass value is not empty
         digit.value = this.recievedPass[index]; // fill every digit with a corresponding recievedPass array element
       }
-
-
 
       digit.addEventListener('keydown', (e: KeyboardEvent) => {
         if(e.key !== 'Backspace' && index >= 0 && index < this.digits.length -1) {
@@ -80,6 +74,9 @@ export class SinChar {
       digit.addEventListener('keyup', (e: KeyboardEvent) => {
         if(this.debugMode) {
           console.log('keyup');
+        }
+        if(this.filledClass && digit.value !== '') {
+          digit.classList.add(this.filledClass);
         }
 
         if(index === this.digits.length - 1) {
