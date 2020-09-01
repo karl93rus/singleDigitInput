@@ -55,8 +55,6 @@ export class SinChar {
           }
           if(this.filledClass && digit.value !== '') {
             digit.classList.add(this.filledClass);
-          } else if(this.filledClass && digit.value === '') {
-            digit.classList.remove(this.filledClass);
           }
           this.digits[index + 1].focus();
           e.preventDefault();
@@ -68,6 +66,9 @@ export class SinChar {
         if(digit.value.length === 1 && e.key === 'Backspace' && index > 0) {
           this.isFilled = false;
           digit.value = '';
+          if(this.filledClass && digit.value === '') {
+            digit.classList.remove(this.filledClass);
+          }
           return;
         } else if(digit.value.length === 0 && e.key === 'Backspace' && index > 0) {
           this.isFilled = false;
