@@ -1,4 +1,4 @@
-interface IOptions {
+export interface IOptions {
   selector: string;
   hiddenInputId: string;
   filledClass?: string;
