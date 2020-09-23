@@ -45,7 +45,7 @@ export class SinChar {
   public processCodeInput(cb?: Function) {  
     this.digits.forEach((digit, index) => {
 
-      if(this.filledPass){
+      if(this.filledPass && this.fillRecieved){
         // if pass value is not empty
         digit.value = this.recievedPass[index]; // fill every digit with a corresponding recievedPass array element
       }
