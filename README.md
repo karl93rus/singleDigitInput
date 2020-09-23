@@ -21,9 +21,10 @@ Imagine structure like this:
 ```
 It has 6 inputs for typing in 1 digit per input. For exapmle it can be authorization sms code.
 Create instance and pass options object. Options are:
-* ```selector```: CSS selector to pick all inputs. It is a ```querySelectorAll``` underhood.
-* ```hiddenInputId```: ID attribute of a hidden input. This input stores all the digits we entered.
-* ```filledClass?```: name of a class to decorate filled input. This is optional parameter.
+* ```selector: string```: CSS selector to pick all inputs. It is a ```querySelectorAll``` underhood.
+* ```hiddenInputId: string```: ID attribute of a hidden input. This input stores all the digits we entered.
+* ```fillRecievedValue: boolean```: If true, inputs will be filled in case server returns value fo hiddenInput input.
+* ```filledClass?: string | undefined```: name of a class to decorate filled input. This is optional parameter.
 
 After instance is created, run ```.processCodeInput(callback)``` method. This will initialize all keyboard the events.
 Please notice, that you have to manualy store the final value result as shown in example below.
@@ -31,7 +32,8 @@ I am thinking about making this process less annoying for user.
 ```javascript
 const options = {
   selector: '.inputs-div > .my-input',
-  hiddenInputId: 'final-value'
+  hiddenInputId: 'final-value',
+  fillRecievedValue: true
 }
 const sch = new SinChar(options);
 sch.processCodeInput(() => {
