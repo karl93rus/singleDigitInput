@@ -1,6 +1,7 @@
 export interface IOptions {
     selector: string;
     hiddenInputId: string;
+    fillRecievedValue: boolean;
     filledClass?: string;
     debug?: boolean;
 }
@@ -10,6 +11,7 @@ export declare class SinChar {
     private filledPass;
     private recievedPass;
     private isFilled;
+    private fillRecieved;
     private debugMode?;
     private filledClass?;
     constructor(options: IOptions);

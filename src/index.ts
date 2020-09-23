@@ -1,6 +1,7 @@
 export interface IOptions {
   selector: string;
   hiddenInputId: string;
+  fillRecievedValue: boolean;
   filledClass?: string;
   debug?: boolean
 }
@@ -11,6 +12,7 @@ export class SinChar {
   private filledPass: boolean; // is pass value emty?
   private recievedPass: string[]; // empty array to store splitted pass value
   private isFilled: boolean;
+  private fillRecieved: boolean;
   private debugMode?: boolean;
   private filledClass?: string;
 
@@ -19,6 +21,7 @@ export class SinChar {
     this.digits = Array.from(document.querySelectorAll(options.selector)) as HTMLInputElement[];
     this.resultingPassInput = document.getElementById(options.hiddenInputId) as HTMLInputElement;
     this.filledPass = this.resultingPassInput.value ? true : false;
+    this.fillRecieved = false;
     this.recievedPass = [];
     this.isFilled = false;
 
@@ -33,7 +36,7 @@ export class SinChar {
     
     // if password input value is not empty (incorrect code was filled in),
     // fill code this.digits with recieved value
-    if(this.filledPass) {
+    if(this.filledPass && this.fillRecieved) {
       // if pass value is not empty
       this.recievedPass = this.resultingPassInput.value.split(''); // split pass value spring into array
     }
