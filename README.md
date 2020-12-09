@@ -25,10 +25,14 @@ Create instance and pass options object. Options are:
 * ```hiddenInputId: string```: ID attribute of a hidden input. This input stores all the digits we entered.
 * ```fillRecievedValue: boolean```: If true, inputs will be filled in case server returns value fo hiddenInput input.
 * ```filledClass?: string | undefined```: name of a class to decorate filled input. This is optional parameter.
+* ```numbersOnly?: boolean```: if ```true``` only numbers allowed. Default is false.
 
-After instance is created, run ```.processCodeInput(callback)``` method. This will initialize all keyboard the events.
+
+Supports ```paste``` event with ```Ctrl+C```. After paste event fired, the callback function executes.
+
+
+After instance is created, run ```.processCodeInput(callback)``` method. This will initialize all the keyboard events.
 Please notice, that you have to manualy store the final value result as shown in example below.
-I am thinking about making this process less annoying for user.
 ```javascript
 const options = {
   selector: '.inputs-div > .my-input',
@@ -41,5 +45,3 @@ sch.processCodeInput(() => {
   // Here is your code...
 });
 ```
-
-#### [Sourse code on github](https://github.com/karl93rus/singleDigitInput)
