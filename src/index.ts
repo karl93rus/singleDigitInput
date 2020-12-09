@@ -41,7 +41,9 @@ export class SinChar {
     }
   }
 
-  public processCodeInput(cb?: Function) {  
+  public processCodeInput(cb?: Function) {
+    this.digits[0].focus(); // autofocus first input
+
     this.digits.forEach((digit, index) => {
 
       if(this.filledPass && this.fillRecieved){
@@ -67,7 +69,7 @@ export class SinChar {
         const data = e.clipboardData?.getData('text').split('');
         e.preventDefault();
 
-        if(data && data?.length > 0) {
+        if(data && data.length > 0) {
           this.digits[index].value = data[index]; // fill every digit with a corresponding pastedata array element
           this.digits.forEach((d, i) => {
             this.digits[i].value = data[i];
