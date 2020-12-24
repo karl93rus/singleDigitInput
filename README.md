@@ -8,6 +8,12 @@ Visually it looks something like this. After filling up all the inputs a callbac
 
 Run ```npm i sinchar``` to install as npm package.
 
+#### OR
+
+Embed it via script tag
+
+```<script src="https://unpkg.com/sinchar@latest/dist/index.js"></script>```
+
 ### Usage
 Imagine structure like this:
 ```html
