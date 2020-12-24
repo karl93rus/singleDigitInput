@@ -4,6 +4,7 @@ interface IOptions {
   fillRecievedValue: boolean;
   filledClass?: string;
   numbersOnly?: boolean;
+  autofocus?: boolean;
 }
 
 export default class SinChar {
@@ -14,6 +15,7 @@ export default class SinChar {
   private fillRecieved: boolean;
   private filledClass?: string;
   private numbersOnly?: boolean;
+  private autofocus?: boolean;
 
   // constructor(selector: string, hiddenInputId: string, debug?: boolean) {
   constructor(options: IOptions) {
@@ -39,11 +41,15 @@ export default class SinChar {
       // if pass value is not empty
       this.recievedPass = this.resultingPassInput.value.split(''); // split pass value spring into array
     }
+
+    if(options.autofocus) {
+      this.autofocus = true;
+    }
   }
 
   public processCodeInput(cb?: Function) {
-    this.digits[0].focus(); // autofocus first input
-
+    
+    
     this.digits.forEach((digit, index) => {
 
       if(this.filledPass && this.fillRecieved){
@@ -63,6 +69,11 @@ export default class SinChar {
             digit.classList.remove(this.filledClass!);
           }
         });
+      }
+
+      
+      if(this.autofocus) {
+        this.digits[0].focus();
       }
 
       digit.addEventListener('paste', (e: ClipboardEvent) => {
