@@ -53,5 +53,6 @@ Option | Type | Required | Description
 ```selector``` | string | yes | CSS selector to pick all inputs. It is a ```querySelectorAll``` underhood.
 ```hiddenInputId``` | string | yes | ID attribute of a hidden input. This input stores all the digits we entered.
 ```fillRecievedValue``` | boolean | yes | If true, inputs will be filled in case ```hiddenInput``` input value is not empty.
-```filledClass?``` | string | no | Name of a class to decorate filled input. This is optional parameter.
-```numbersOnly?``` | boolean | no | If ```true``` only numbers allowed. Default is false.
+```filledClass``` | string | no | Name of a class to decorate filled input. This is optional parameter.
+```numbersOnly``` | boolean | no | If ```true``` only numbers allowed. Default is false.
+```autofocus``` | boolean | no | If ```true``` first input will be fucused automatically. Default is false.

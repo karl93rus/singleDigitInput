@@ -1,3 +1,3 @@
-import SinChar from './SinChar';
+import { SinChar, IOptions } from './SinChar';
 
-export { SinChar };
+export { SinChar, IOptions };

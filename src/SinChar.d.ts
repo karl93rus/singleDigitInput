@@ -1,11 +1,12 @@
-interface IOptions {
+export interface IOptions {
     selector: string;
     hiddenInputId: string;
     fillRecievedValue: boolean;
     filledClass?: string;
     numbersOnly?: boolean;
+    autofocus?: boolean;
 }
-export default class SinChar {
+export declare class SinChar {
     private digits;
     private resultingPassInput;
     private filledPass;
@@ -13,7 +14,7 @@ export default class SinChar {
     private fillRecieved;
     private filledClass?;
     private numbersOnly?;
+    private autofocus?;
     constructor(options: IOptions);
     processCodeInput(cb?: Function): void;
 }
-export {};

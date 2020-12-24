@@ -1,4 +1,4 @@
-interface IOptions {
+export interface IOptions {
   selector: string;
   hiddenInputId: string;
   fillRecievedValue: boolean;
@@ -7,7 +7,7 @@ interface IOptions {
   autofocus?: boolean;
 }
 
-export default class SinChar {
+export class SinChar {
   private digits: HTMLInputElement[]; // inputs
   private resultingPassInput: HTMLInputElement; // hidden input to assemble the final string
   private filledPass: boolean; // is pass value emty?
@@ -15,7 +15,7 @@ export default class SinChar {
   private fillRecieved: boolean;
   private filledClass?: string;
   private numbersOnly?: boolean;
-  private autofocus?: boolean;
+  private autofocus?: boolean = false;
 
   // constructor(selector: string, hiddenInputId: string, debug?: boolean) {
   constructor(options: IOptions) {
