@@ -1,14 +1,21 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: './src/index.ts',
+  watch: true,
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js'
+    filename: 'index.js',
+    // library: 'SinChar',
+    // libraryExport: '',
+    libraryTarget: 'umd',
   },
   resolve: {
     extensions: ['.ts', '.js']
+  },
+  optimization: {
+    minimize: false
   },
   module: {
 		rules: [
