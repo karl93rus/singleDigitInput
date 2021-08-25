@@ -155,7 +155,6 @@ export class SinChar {
           this.resultingPassInput.value += d.value;
         });
         
-        console.log(this.fullfilled, this.result);
         if (this.fullfilled && cb) {
           cb(this.result);
         }

@@ -32,7 +32,7 @@ It has 6 inputs for typing in 1 digit per input. For exapmle it can be authoriza
 
 Create instance and pass options object.
 After instance is created, run ```.processCodeInput(callback)``` method. This will initialize all the keyboard events.
-Please notice, that you have to manualy store the final value result as shown in example below.
+Please notice, that you have to pass the final value argument to the callback result as shown in example below.
 ```javascript
 const options = {
   selector: '.inputs-div > .my-input',
@@ -40,8 +40,8 @@ const options = {
   fillRecievedValue: true
 }
 const sch = new SinChar(options);
-sch.processCodeInput(() => {
-  const FINAL_RESULT = document.getElementById('final-value').value;
+sch.processCodeInput((res) => {
+  // res is the final value
   // Here is your code...
 });
 ```
