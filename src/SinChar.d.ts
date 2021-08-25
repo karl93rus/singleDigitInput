@@ -15,6 +15,11 @@ export declare class SinChar {
     private filledClass?;
     private numbersOnly?;
     private autofocus?;
+    private get fullfilled();
+    private get result();
     constructor(options: IOptions);
-    processCodeInput(cb?: Function): void;
+    processCodeInput(cb?: (result: string) => void): void;
+    private insertResultValue;
+    private setFilledClasses;
+    private focusDigit;
 }
