@@ -1,2 +1,5 @@
 node_modules/
 dist/
+htmltest/
+.vscode/
+.DS_Store

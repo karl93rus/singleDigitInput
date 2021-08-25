@@ -1,4 +1,4 @@
-import { isNumber, isPaste, clamp } from "./utils";
+import { isNumber, isPaste, clamp } from './utils';
 
 export interface IOptions {
   selector: string;
@@ -25,17 +25,12 @@ export class SinChar {
   }
 
   private get result() {
-    return this.resultingPassInput?.value ?? "";
+    return this.resultingPassInput?.value ?? '';
   }
 
-  // constructor(selector: string, hiddenInputId: string, debug?: boolean) {
   constructor(options: IOptions) {
-    this.digits = Array.from(
-      document.querySelectorAll(options.selector)
-    ) as HTMLInputElement[];
-    this.resultingPassInput = document.getElementById(
-      options.hiddenInputId
-    ) as HTMLInputElement;
+    this.digits = Array.from(document.querySelectorAll(options.selector)) as HTMLInputElement[];
+    this.resultingPassInput = document.getElementById(options.hiddenInputId) as HTMLInputElement;
     this.filledPass = !!this.resultingPassInput.value;
     this.fillRecieved = options.fillRecievedValue;
     this.recievedPass = [];
@@ -50,7 +45,7 @@ export class SinChar {
     // fill code this.digits with recieved value
     if (this.filledPass && this.fillRecieved) {
       // if pass value is not empty
-      this.recievedPass = this.resultingPassInput.value.split(""); // split pass value spring into array
+      this.recievedPass = this.resultingPassInput.value.split(''); // split pass value spring into array
     }
 
     if (options.autofocus) {
@@ -58,11 +53,11 @@ export class SinChar {
     }
   }
 
-  public processCodeInput(cb?: (result: string) => void) {
+  public processCodeInput(cb?: (result: string) => void): void {
     this.digits.forEach((digit, index) => {
       if (this.filledPass && this.fillRecieved) {
         // if pass value is not empty
-        digit.value = this.recievedPass[index] ?? ""; // fill every digit with a corresponding recievedPass array element
+        digit.value = this.recievedPass[index] ?? ''; // fill every digit with a corresponding recievedPass array element
         if (this.filledClass) {
           digit.classList.add(this.filledClass);
         }
@@ -72,11 +67,11 @@ export class SinChar {
         digit.focus();
       }
 
-      digit.addEventListener("paste", (e: ClipboardEvent) => {
+      digit.addEventListener('paste', (e: ClipboardEvent) => {
         e.preventDefault();
         const data = e.clipboardData
-          ?.getData("text")
-          .split("")
+          ?.getData('text')
+          .split('')
           .filter((char) => !this.numbersOnly || isNumber(char))
           .slice(0, this.digits.length);
 
@@ -94,13 +89,13 @@ export class SinChar {
         }
       });
 
-      digit.addEventListener("keydown", (e: KeyboardEvent) => {
-        const isBackspace = e.key === "Backspace";
-        const isControl = e.key === "Control";
-        const allowedKeys = ["Backspace", "Control", "Tab"];
+      digit.addEventListener('keydown', (e: KeyboardEvent) => {
+        const isBackspace = e.key === 'Backspace';
+        const isControl = e.key === 'Control';
+        const allowedKeys = ['Backspace', 'Control', 'Tab'];
 
-        const isLeftArrow = e.code === "ArrowLeft";
-        const isRightArrow = e.code === "ArrowRight";
+        const isLeftArrow = e.code === 'ArrowLeft';
+        const isRightArrow = e.code === 'ArrowRight';
 
         if (isLeftArrow || isRightArrow) {
           const indexToFocus = clamp(
@@ -123,17 +118,19 @@ export class SinChar {
         }
 
         if (index > 0 && isBackspace) {
-          if (digit.value === "") {
+          if (digit.value === '') {
             this.focusDigit(index - 1);
           } else {
-            digit.value = "";
+            digit.value = '';
           }
+        } else if(index === 0 && isBackspace) {
+          digit.value = '';
         }
 
         if (
           !isBackspace &&
           !isControl &&
-          digit.value !== "" &&
+          digit.value !== '' &&
           index >= 0 &&
           index < this.digits.length - 1
         ) {
@@ -146,13 +143,19 @@ export class SinChar {
         }, 0);
       });
 
-      digit.addEventListener("input", (e: Event) => {
+      digit.addEventListener('input', (e: Event) => {
         e.preventDefault();
-
-        if (index < this.digits.length - 1 && digit.value !== "") {
+        
+        if (index < this.digits.length - 1 && digit.value !== '') {
           this.focusDigit(index + 1);
         }
 
+        this.resultingPassInput.value = '';
+        this.digits.forEach(d => {
+          this.resultingPassInput.value += d.value;
+        });
+        
+        console.log(this.fullfilled, this.result);
         if (this.fullfilled && cb) {
           cb(this.result);
         }
@@ -161,10 +164,7 @@ export class SinChar {
   }
 
   private insertResultValue() {
-    this.resultingPassInput.value = this.digits.reduce(
-      (result, digit) => result + digit.value,
-      ""
-    );
+    this.resultingPassInput.value = this.digits.reduce((result, digit) => result + digit.value, '');
   }
 
   private setFilledClasses() {

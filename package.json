@@ -9,7 +9,8 @@
     "build": "rm -rf dist/ && webpack --config webpack.build.js && cp ./src/SinChar.d.ts ./dist/index.d.ts",
     "compile": "tsc && npx minify ./dist/index.js > ./dist/index2.js && cat ./dist/index2.js > ./dist/index.js && rm ./dist/index2.js",
     "pub:patch": "npm version patch && npm publish",
-    "pub:minor": "npm version minor && npm publish"
+    "pub:minor": "npm version minor && npm publish",
+    "lint": "eslint . --ext .ts"
   },
   "author": "Alex Sazonov",
   "repository": {
@@ -18,6 +19,9 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
+    "eslint": "^7.32.0",
     "minify": "^5.1.1",
     "ts-loader": "^8.0.12",
     "typescript": "^3.9.5",
