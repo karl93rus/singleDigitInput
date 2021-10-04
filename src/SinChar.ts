@@ -55,19 +55,19 @@ export class SinChar {
 
   public processCodeInput(cb?: (result: string) => void): void {
     this.digits.forEach((digit, index) => {
-      digit.setAttribute("maxlength", "1");
-      digit.setAttribute("autocapitalize", "off");
-      digit.setAttribute("autocorrect", "off");
-      digit.setAttribute("autocomplete", "off");
+      digit.setAttribute('maxlength', '1');
+      digit.setAttribute('autocapitalize', 'off');
+      digit.setAttribute('autocorrect', 'off');
+      digit.setAttribute('autocomplete', 'off');
 
       if (this.numbersOnly) {
-          digit.setAttribute("inputmode", "numeric");
-          digit.setAttribute("pattern", "[0-9]*");
+          digit.setAttribute('inputmode', 'numeric');
+          digit.setAttribute('pattern', '[0-9]*');
       }
 
       if (index === 0) {
-          digit.setAttribute("autocomplete", "one-time-code");
-          digit.setAttribute("maxlength", this.digits.length.toString());
+          digit.setAttribute('autocomplete', 'one-time-code');
+          digit.setAttribute('maxlength', this.digits.length.toString());
       }
 
       if (this.filledPass && this.fillRecieved) {
@@ -84,11 +84,11 @@ export class SinChar {
 
 
       /* always focus first digit if it's empty */
-      digit.addEventListener("focus", () => {
+      digit.addEventListener('focus', () => {
         if (index !== 0 && !this.digits[0].value) {
             this.focusDigit(0);
         }
-      })
+      });
 
       digit.addEventListener('paste', (e: ClipboardEvent) => {
         e.preventDefault();
@@ -175,9 +175,9 @@ export class SinChar {
           digit.value = value[0];
           value
               .slice(1, this.digits.length)
-              .split("")
+              .split('')
               .forEach((char, charIdx) => {
-                  this.digits[charIdx + 1].value = char
+                  this.digits[charIdx + 1].value = char;
               });
           this.focusDigit(this.digits.length - 1);
         } else if (
@@ -187,7 +187,7 @@ export class SinChar {
             this.focusDigit(index + 1);
           }
 
-        this.insertResultValue()
+        this.insertResultValue();
         if (this.fullfilled && cb) {
           cb(this.result);
         }
