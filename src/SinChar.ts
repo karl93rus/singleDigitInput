@@ -55,6 +55,21 @@ export class SinChar {
 
   public processCodeInput(cb?: (result: string) => void): void {
     this.digits.forEach((digit, index) => {
+      digit.setAttribute("maxlength", "1");
+      digit.setAttribute("autocapitalize", "off");
+      digit.setAttribute("autocorrect", "off");
+      digit.setAttribute("autocomplete", "off");
+
+      if (this.numbersOnly) {
+          digit.setAttribute("inputmode", "numeric");
+          digit.setAttribute("pattern", "[0-9]*");
+      }
+
+      if (index === 0) {
+          digit.setAttribute("autocomplete", "one-time-code");
+          digit.setAttribute("maxlength", this.digits.length.toString());
+      }
+
       if (this.filledPass && this.fillRecieved) {
         // if pass value is not empty
         digit.value = this.recievedPass[index] ?? ''; // fill every digit with a corresponding recievedPass array element
@@ -66,6 +81,14 @@ export class SinChar {
       if (this.autofocus && index === 0) {
         digit.focus();
       }
+
+
+      /* always focus first digit if it's empty */
+      digit.addEventListener("focus", () => {
+        if (index !== 0 && !this.digits[0].value) {
+            this.focusDigit(0);
+        }
+      })
 
       digit.addEventListener('paste', (e: ClipboardEvent) => {
         e.preventDefault();
@@ -145,16 +168,26 @@ export class SinChar {
 
       digit.addEventListener('input', (e: Event) => {
         e.preventDefault();
-        
-        if (index < this.digits.length - 1 && digit.value !== '') {
-          this.focusDigit(index + 1);
-        }
 
-        this.resultingPassInput.value = '';
-        this.digits.forEach(d => {
-          this.resultingPassInput.value += d.value;
-        });
-        
+        const value = digit.value;
+        /* case for ios 15 otp code autofill */
+        if (index === 0 && value.length > 1) {
+          digit.value = value[0];
+          value
+              .slice(1, this.digits.length)
+              .split("")
+              .forEach((char, charIdx) => {
+                  this.digits[charIdx + 1].value = char
+              });
+          this.focusDigit(this.digits.length - 1);
+        } else if (
+          index < this.digits.length - 1 && 
+          digit.value !== ''
+        ) {
+            this.focusDigit(index + 1);
+          }
+
+        this.insertResultValue()
         if (this.fullfilled && cb) {
           cb(this.result);
         }
