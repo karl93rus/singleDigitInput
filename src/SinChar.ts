@@ -58,7 +58,7 @@ export class SinChar {
       digit.setAttribute('maxlength', '1');
       digit.setAttribute('autocapitalize', 'off');
       digit.setAttribute('autocorrect', 'off');
-      digit.setAttribute('autocomplete', 'off');
+      digit.setAttribute('autocomplete', 'new-password');
 
       if (this.numbersOnly) {
           digit.setAttribute('inputmode', 'numeric');
